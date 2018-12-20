@@ -26,7 +26,7 @@ else {
    <center>
    <div class = "container">
    <div id = "menu">
-   <a href="logout.php">Logout</a>
+   <a href="model/logout.php">Logout</a>
    </div>
    <article class = "tabs">
    
