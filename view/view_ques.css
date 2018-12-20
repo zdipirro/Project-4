@@ -1,0 +1,93 @@
+html {
+	background: url(maxresdefault.jpg);
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  color: black;
+  width: 800px;
+  height: auto;
+	margin-left: auto;
+ 	margin-right: auto;
+ 	margin-bottom: auto;
+  margin-top: 40px;
+  padding-top: 2px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+	border: 1.5px solid black;
+  border-radius: 3px;
+	background-color: #ADD8E6;
+}
+
+body h2 {
+  padding-top: 15px;
+  font-weight: bold;
+  margin-left: 15px;
+  line-height: 1px;
+}
+
+body h4 {
+  font-weight: lighter;
+  padding-bottom: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+body h5 {
+  margin-left: 25px;
+  color: gray;
+  line-height: 1px;
+  font-weight: lighter;
+}
+
+body h5 {
+  margin-left: 15px;
+  color: #F5FFFA;
+  line-height: 5px;
+  font-weight: bold;
+}
+
+body h5 a{
+  float: right;
+  color: #F5FFFA;
+  line-height: 5px;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.body {
+  height: auto;
+  background-color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 15px;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin-left: 3.5px;
+  margin-right: 3.5px;
+  padding-bottom: 25px;
+}
+
+textarea {
+  padding: 15px;
+  margin: 0px;
+}
+
+.body input[type="submit"] {
+  background-color: #D3D3D3;
+  border-left: 161.75px solid #D3D3D3;
+  border-right: 161.75px solid #D3D3D3;
+  cursor: pointer;
+  padding: 0px;
+  margin: 0;
+  outline-style: solid;
+  outline-color: black;
+  outline-width: thin;
+}
