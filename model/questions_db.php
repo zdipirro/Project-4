@@ -32,6 +32,13 @@ class Questions {
     return $count;
   }
   
+  public static function newQuestion($qname, $qbody ,$skills, $email, $id) {
+    $query = "INSERT INTO questions (title, body, skills, owneremail, ownerid) VALUES ('$qname', '$qbody', '$skills', '$email', '$id')";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $statement->closeCursor();
+  }
+  
   public static function getQuestions($email) {
     global $db;
     $queryq = "SELECT * FROM questions WHERE owneremail =:email";
@@ -42,6 +49,7 @@ class Questions {
     $stmtq->closeCursor();
     return $ques;
   }
+  
   public static function getAllQuestions() {
     global $db;
     $queryq = "SELECT * FROM questions";
@@ -70,6 +78,16 @@ class Questions {
     return $results;
   }
   
+  public static function getQuestionID($id){
+    global $db;
+    $query = "SELECT id FROM questions where id = '$id'";
+    $q = $db->prepare($query);
+    $q->execute();
+    $results = $q->fetch(PDO::FETCH_OBJ);
+    $q->closeCursor();
+    return $results;
+  }
+  
   public static function updateQuestion($id, $qname, $qbody, $skills){
     global $db;
         $query = "UPDATE questions SET title = :qname, body= :qbody, skills = :qskills    where id = '$id'";
@@ -81,12 +99,14 @@ class Questions {
         $stmt->closeCursor();
   }
   
-  public static function newAnswer() {
-  
-  }
-  
-  public static function getAnswers() {
-  
+  public static function getAnswers($id) {
+    global $db;
+    $querya = "SELECT * FROM answers WHERE ownerid = '$id' ";
+    $stmta = $db->prepare($querya);
+    $stmta->execute();
+    $answers = $stmta->fetchAll();
+    $stmta->closeCursor();
+    return $answers;
   }
   
 }

@@ -2,7 +2,10 @@
 include("model/accounts_db.php");
 include("model/database.php");
 include("model/questions_db.php");
+include("model/answers_db.php");
 
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);  
+ini_set('display_errors' , 1);
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -123,6 +126,10 @@ elseif ($action == 'viewQues') {
     $id = filter_input(INPUT_POST, 'id',FILTER_VALIDATE_INT);
     $q = new Questions();
     $quesdata = $q->getQuestionData($id);
+    $v = new Questions();
+    $getID = $v->getQuestionID($id);
+    $z = new Questions();
+    $getAnswers = $z->getAnswers($id);
     if ($id == NULL || $id == FALSE ) {
         echo "Missing or incorrect id.";
     } else {
@@ -211,15 +218,16 @@ elseif ($action == 'create_new_question') {
       echo "Question body has a maximum length of 500 characters<br><br>"; 
       $errors +=1;
     }
+    else {
+      session_start();
+      $email = $_SESSION['email'];
+      $query = "INSERT INTO questions (title, body, skills, owneremail, ownerid) VALUES ('$qname', '$qbody', '$skills', '$email', '$id')";
+      $statement = $db->prepare($query);
+      $statement->execute();
+      $statement->closeCursor();
+      header('Location: index.php?action=display_questions');
+   }
   }
-  session_start();
-  $email = $_SESSION['email']; 
-  $query = "INSERT INTO questions (title, body, skills, owneremail, ownerid) VALUES ('$qname', '$qbody', '$skills', '$email', '$id')";
-  $statement = $db->prepare($query);
-  $statement->execute();
-  $statement->closeCursor();
-  header('Location: index.php?action=display_questions');
-
 }
 
 else if ($action == 'deleteQuestion') {
@@ -233,5 +241,59 @@ else if ($action == 'deleteQuestion') {
     $d->deleteQuestion($id);
     header("Location: index.php?action=display_questions");
   }
+}
+
+else if ($action == 'addAnswer') {
+  $answer = filter_input(INPUT_POST, 'answer');
+  $id = filter_input(INPUT_POST, 'id',FILTER_VALIDATE_INT);
+  session_start();
+  $email = $_SESSION['email']; 
+  $query = "INSERT INTO answers (answer, owneremail, ownerid) VALUES ('$answer', '$email', '$id')";
+  $statement = $db->prepare($query);
+  $statement->execute();
+  $statement->closeCursor();
+}
+
+else if ($action == 'upVote') {
+  $id = filter_input(INPUT_POST, 'id',FILTER_VALIDATE_INT);
+  $z = new Answers();
+  $getAnswerID = $z->getAnswerID($author);
+    foreach($getAnswerID as $ids) {
+    $answerID = $ids;
+  }
+  $g = new Answers();
+  $getScore = $g->getScore($answerID);
+  foreach($getScore as $scores) {
+    $score = $scores;
+  }
+  $score+=1;
+  $a = new Answers();
+  $upvote = $a->upVote($answerID, $score);
+  header("Location: index.php?action=display_questions");
+  
+}
+
+else if ($action == 'downVote') {
+  $id = filter_input(INPUT_POST, 'id',FILTER_VALIDATE_INT);
+  $z = new Answers();
+  $getAnswerID = $z->getAnswerID($author);
+  foreach($getAnswerID as $ids) {
+    $answerID = $ids;
+  }
+  $g = new Answers();
+  $getScore = $g->getScore($answerID);
+  foreach($getScore as $scores) {
+    $score = $scores;
+  }
+  $score-=1;
+    $i = new Answers();
+  $getAuthor = $i->getAuthor($answerID);
+  foreach($getAuthor as $authors) {
+    $author = $authors['owneremail'];
+  }
+
+  $a = new Answers();
+  $downvote = $a->downVote($answerID, $score);
+  header("Location: index.php?action=display_questions");
 }
 ?>

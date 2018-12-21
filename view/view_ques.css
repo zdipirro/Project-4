@@ -1,5 +1,5 @@
 html {
-	background: url(maxresdefault.jpg);
+	background: url(../images/maxresdefault.jpg);
 }
 
 body {
@@ -36,13 +36,6 @@ body h4 {
 }
 
 body h5 {
-  margin-left: 25px;
-  color: gray;
-  line-height: 1px;
-  font-weight: lighter;
-}
-
-body h5 {
   margin-left: 15px;
   color: #F5FFFA;
   line-height: 5px;
@@ -55,6 +48,32 @@ body h5 a{
   line-height: 5px;
   font-weight: bold;
   margin-right: 15px;
+}
+
+#skills {
+  margin-left: 25px;
+  color: black;
+  line-height: 1px;
+  font-weight: lighter;
+}
+
+#answer {
+  margin-left: 25px;
+  color: black;
+  line-height: 1px;
+  font-weight: lighter;
+  padding-bottom: 20px;
+}
+
+#down {
+  transform: scale(1, -1);
+}
+
+body h6 {
+  margin-left: 25px;
+  color: gray;
+  line-height: 1px;
+  font-weight: lighter;
 }
 
 .body {
@@ -90,4 +109,17 @@ textarea {
   outline-style: solid;
   outline-color: black;
   outline-width: thin;
+}
+
+button {
+	background: none;
+	color: black;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+button:hover, input [type = "submit"]:hover {
+  color: lightblue;
 }
