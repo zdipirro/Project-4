@@ -257,7 +257,7 @@ else if ($action == 'addAnswer') {
 else if ($action == 'upVote') {
   $id = filter_input(INPUT_POST, 'id',FILTER_VALIDATE_INT);
   $z = new Answers();
-  $getAnswerID = $z->getAnswerID($author);
+  $getAnswerID = $z->getAnswerID($id);
     foreach($getAnswerID as $ids) {
     $answerID = $ids;
   }
